@@ -188,6 +188,9 @@ chown -Rh smokeping:www-data /var/cache/smokeping /var/lib/smokeping \
 chmod -R g+ws /var/cache/smokeping /var/lib/smokeping /run/smokeping 2>&1 |
             grep -iv 'Read-only' || :
 
+
+sed -i 's|server.port\s*= 80|server.port = $PORT0|' /etc/lighttpd/lighttpd.conf
+
 if [[ $# -ge 1 && -x $(which $1 2>&-) ]]; then
     exec "$@"
 elif [[ $# -ge 1 ]]; then
